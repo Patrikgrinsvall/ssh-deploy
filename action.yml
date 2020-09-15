@@ -18,7 +18,7 @@ inputs:
      description: 'SSH user to connect to the stage server with'
      required: true
      default: 'unset'
-  STAGE_REPO_PATH:
+  STAGE_REMOTE_PATH:
     description: 'The path on server to update'
     required: true
     default: 'unset'
@@ -35,7 +35,7 @@ inputs:
   PROD_SSH_USER:
     description: 'the user the private key belongs to'
     required: false
-  PROD_REPO_PATH:
+  PROD_REMOTE_PATH:
     required: false
     description: 'the path to the repo'
 runs:
