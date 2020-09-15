@@ -9,14 +9,21 @@ inputs:
     default: 22
   STAGE_SSH_PRIVATE_KEY:
     description: 'private key in NOT IN OPENSSH FORMAT but in RSA PRIVATE KEY format.
-  STAGE_SSH_HOST:
   STAGE_SSH_USER:
+     description: 'SSH user to connect to the stage server with'
   STAGE_REPO_PATH:
+    description: 'The path on server to update'
   PROD_SSH_PRIVATE_KEY:
+    description: 'the private key'
   PROD_SSH_HOST:
+    description: 'the host'
   PROD_SSH_PORT:
+    description: 'port if other than 22'
+    default: '22'
   PROD_SSH_USER:
+    description: 'the user the private key belongs to'
   PROD_REPO_PATH:
+    description: 'the path to the repo'
   
   using: "composite"
   steps: 
