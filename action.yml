@@ -45,6 +45,7 @@ inputs:
       - id: deploystage
         shell: bash
         run: |
+            echo $INPUT_STAGE_SSH_PORT
             mkdir -p ~/.ssh
             echo "$INPUT_STAGE_SSH_KEY" > ~/.ssh/stage_id_rsa
             sudo chmod 600 ~/.ssh/stage_id_rsa
