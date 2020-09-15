@@ -4,6 +4,7 @@ author: 'Patrik Grinsvall'
 inputs:
   STAGE_SSH_HOST:
     description: 'ssh host'
+    default: 'unset'
     required: true
   STAGE_SSH_PORT:
     description: 'ssh port'
@@ -12,12 +13,15 @@ inputs:
   STAGE_SSH_PRIVATE_KEY:
     description: 'private key in NOT IN OPENSSH FORMAT but in RSA PRIVATE KEY format.'
     required: true
+    default: 'unset'
   STAGE_SSH_USER:
      description: 'SSH user to connect to the stage server with'
      required: true
+     default: 'unset'
   STAGE_REPO_PATH:
     description: 'The path on server to update'
     required: true
+    default: 'unset'
   PROD_SSH_PRIVATE_KEY:
     description: 'the private key'
     required: false
