@@ -35,16 +35,16 @@ inputs:
     required: false
     description: 'the path to the repo'
   env:
-      STAGE_SSH_KEY: "${{ inputs.STAGE_SSH_PRIVATE_KEY }}"
-      STAGE_SSH_HOST: "${{ inputs.STAGE_SSH_HOST }}"
-      STAGE_SSH_PORT: "${{ inputs.STAGE_SSH_PORT }}"
-      STAGE_SSH_USER: "${{ inputs.STAGE_SSH_USER }}"
-      STAGE_REMOTE_PATH: "${{ inputs.STAGE_REPO_PATH }}"
-      PROD_SSH_KEY: "${{ inputs.PROD_SSH_PRIVATE_KEY }}"
-      PROD_SSH_HOST: "${{ inputs.PROD_SSH_HOST }}"
-      PROD_SSH_PORT: "${{ inputs.PROD_SSH_PORT }}"
-      PROD_SSH_USER: "${{ inputs.PROD_SSH_USER }}"
-      PROD_REMOTE_PATH: "${{ inputs.PROD_REPO_PATH }}" 
+    STAGE_SSH_KEY: "${{ inputs.STAGE_SSH_PRIVATE_KEY }}"
+    STAGE_SSH_HOST: "${{ inputs.STAGE_SSH_HOST }}"
+    STAGE_SSH_PORT: "${{ inputs.STAGE_SSH_PORT }}"
+    STAGE_SSH_USER: "${{ inputs.STAGE_SSH_USER }}"
+    STAGE_REMOTE_PATH: "${{ inputs.STAGE_REPO_PATH }}"
+    PROD_SSH_KEY: "${{ inputs.PROD_SSH_PRIVATE_KEY }}"
+    PROD_SSH_HOST: "${{ inputs.PROD_SSH_HOST }}"
+    PROD_SSH_PORT: "${{ inputs.PROD_SSH_PORT }}"
+    PROD_SSH_USER: "${{ inputs.PROD_SSH_USER }}"
+    PROD_REMOTE_PATH: "${{ inputs.PROD_REPO_PATH }}" 
   runs:
     using: "composite"
     steps:
