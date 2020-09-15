@@ -54,9 +54,5 @@ inputs:
             chmod 700 ~/.ssh
             chmod 600 ~/.ssh/stage_id_rsa
             ssh -i ~/.ssh/stage_id_rsa -o StrictHostKeyChecking=no -p $INPUT_STAGE_SSH_PORT $INPUT_STAGE_SSH_USER@$INPUT_STAGE_SSH_HOST "cd $INPUT_STAGE_REMOTE_PATH && ls -al"
-     - id: deployprod
-       shell: bash
-       run: |
-        echo "start on prod"
-        if [ "${{ github.event.inputs.deployprod }}" != "YES" ]; then echo "Not running prod" && exit; fi;
+
 
