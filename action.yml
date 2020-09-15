@@ -10,7 +10,7 @@ inputs:
     required: true
     default: 22
   STAGE_SSH_PRIVATE_KEY:
-    description: 'private key in NOT IN OPENSSH FORMAT but in RSA PRIVATE KEY format.
+    description: 'private key in NOT IN OPENSSH FORMAT but in RSA PRIVATE KEY format.'
     required: true
   STAGE_SSH_USER:
      description: 'SSH user to connect to the stage server with'
