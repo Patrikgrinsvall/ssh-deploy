@@ -45,20 +45,21 @@ inputs:
       PROD_SSH_PORT: "${{ inputs.PROD_SSH_PORT }}"
       PROD_SSH_USER: "${{ inputs.PROD_SSH_USER }}"
       PROD_REMOTE_PATH: "${{ inputs.PROD_REPO_PATH }}" 
-  using: "composite"
-  steps:
-    - id: deploystage
-      run: |
-          mkdir -p ~/.ssh
-          echo "$STAGE_SSH_KEY" > ~/.ssh/stage_id_rsa
-          sudo chmod 600 ~/.ssh/stage_id_rsa
-          chmod 600 ~/.ssh/stage_id_rsa
-          echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-          chmod 700 ~/.ssh
-          chmod 600 ~/.ssh/stage_id_rsa
-          ssh -i ~/.ssh/stage_id_rsa -o StrictHostKeyChecking=no -p $STAGE_SSH_PORT $STAGE_SSH_USER@$STAGE_SSH_HOST "cd $STAGE_REMOTE_PATH && ls -al"
-   - id: deployprod
-     run: |
-      echo "start on prod"
-      if [ "${{ github.event.inputs.deployprod }}" != "YES" ]; then echo "Not running prod" && exit; fi;
-      
+  runs:
+    using: "composite"
+    steps:
+      - id: deploystage
+        run: |
+            mkdir -p ~/.ssh
+            echo "$STAGE_SSH_KEY" > ~/.ssh/stage_id_rsa
+            sudo chmod 600 ~/.ssh/stage_id_rsa
+            chmod 600 ~/.ssh/stage_id_rsa
+            echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+            chmod 700 ~/.ssh
+            chmod 600 ~/.ssh/stage_id_rsa
+            ssh -i ~/.ssh/stage_id_rsa -o StrictHostKeyChecking=no -p $STAGE_SSH_PORT $STAGE_SSH_USER@$STAGE_SSH_HOST "cd $STAGE_REMOTE_PATH && ls -al"
+     - id: deployprod
+       run: |
+        echo "start on prod"
+        if [ "${{ github.event.inputs.deployprod }}" != "YES" ]; then echo "Not running prod" && exit; fi;
+
