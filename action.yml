@@ -10,7 +10,7 @@ inputs:
     description: 'ssh port'
     required: true
     default: 22
-  STAGE_SSH_PRIVATE_KEY:
+  STAGE_SSH_KEY:
     description: 'private key in NOT IN OPENSSH FORMAT but in RSA PRIVATE KEY format.'
     required: true
     default: 'unset'
@@ -22,7 +22,7 @@ inputs:
     description: 'The path on server to update'
     required: true
     default: 'unset'
-  PROD_SSH_PRIVATE_KEY:
+  PROD_SSH_KEY:
     description: 'the private key'
     required: false
   PROD_SSH_HOST:
