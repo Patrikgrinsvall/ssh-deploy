@@ -56,5 +56,6 @@ runs:
           echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
           chmod 700 ~/.ssh
           chmod 600 ~/.ssh/stage_id_rsa
-          out=$(ssh -i ~/.ssh/stage_id_rsa -o StrictHostKeyChecking=no -p $INPUT_STAGE_SSH_PORT $INPUT_STAGE_SSH_USER@$INPUT_STAGE_SSH_HOST "cd $INPUT_STAGE_REMOTE_PATH && ls -al")
+          ssh -i ~/.ssh/stage_id_rsa -o StrictHostKeyChecking=no -p $INPUT_STAGE_SSH_PORT $INPUT_STAGE_SSH_USER@$INPUT_STAGE_SSH_HOST "cd $INPUT_STAGE_REMOTE_PATH && ls -al"
+          out=?1
           echo "::set-output name=res::$out"
