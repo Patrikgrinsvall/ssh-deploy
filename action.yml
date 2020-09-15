@@ -1,0 +1,10 @@
+name: 'CI/CD and manual prod deployments using ssh+github'
+description: 'This will run deployment to stage server on every push to master and contains a manual workflow for deploying to production.'
+author: 'Patrik Grinsvall'
+inputs:
+  SSH_HOST:
+    description: 'ssh host'
+  STAGE_SSH_PORT:
+    description: 'ssh port'
+    default: 22
+using: "composite"    

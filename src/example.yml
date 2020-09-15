@@ -1,0 +1,14 @@
+- name: This script will connect to the servers and run git pull in them. In the future it will be possible to add even more scripts to extend but this is basic functionality
+  uses: patrikgrinsvall/ssh-deploy@master
+      with:
+        STAGE_SSH_KEY: "${{ secrets.STAGE_SSH_PRIVATE_KEY }}"
+        STAGE_SSH_HOST: ${{ secrets.STAGE_SSH_HOST }}
+        STAGE_SSH_PORT: ${{ secrets.STAGE_SSH_PORT }}
+        STAGE_SSH_USER: ${{ secrets.STAGE_SSH_USER }}
+        STAGE_REMOTE_PATH: ${{ secrets.STAGE_REPO_PATH }}
+        PROD_SSH_KEY: "${{ secrets.PROD_SSH_PRIVATE_KEY }}"
+        PROD_SSH_HOST: ${{ secrets.PROD_SSH_HOST }}
+        PROD_SSH_PORT: ${{ secrets.PROD_SSH_PORT }}
+        PROD_SSH_USER: ${{ secrets.PROD_SSH_USER }}
+        PROD_REMOTE_PATH: ${{ secrets.PROD_REPO_PATH }}
+        script: whoami
