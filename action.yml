@@ -34,7 +34,6 @@ inputs:
   PROD_REPO_PATH:
     required: false
     description: 'the path to the repo'
-runs:
   env:
       STAGE_SSH_KEY: "${{ inputs.STAGE_SSH_PRIVATE_KEY }}"
       STAGE_SSH_HOST: "${{ inputs.STAGE_SSH_HOST }}"
@@ -47,7 +46,7 @@ runs:
       PROD_SSH_USER: "${{ inputs.PROD_SSH_USER }}"
       PROD_REMOTE_PATH: "${{ inputs.PROD_REPO_PATH }}" 
   using: "composite"
-  steps: 
+  steps:
     - id: deploystage
       run: |
           mkdir -p ~/.ssh
