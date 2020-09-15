@@ -4,25 +4,35 @@ author: 'Patrik Grinsvall'
 inputs:
   STAGE_SSH_HOST:
     description: 'ssh host'
+    required: true
   STAGE_SSH_PORT:
     description: 'ssh port'
+    required: true
     default: 22
   STAGE_SSH_PRIVATE_KEY:
     description: 'private key in NOT IN OPENSSH FORMAT but in RSA PRIVATE KEY format.
+    required: true
   STAGE_SSH_USER:
      description: 'SSH user to connect to the stage server with'
+     required: true
   STAGE_REPO_PATH:
     description: 'The path on server to update'
+    required: true
   PROD_SSH_PRIVATE_KEY:
     description: 'the private key'
+    required: false
   PROD_SSH_HOST:
     description: 'the host'
+    required: false
   PROD_SSH_PORT:
     description: 'port if other than 22'
+    required: false
     default: '22'
   PROD_SSH_USER:
     description: 'the user the private key belongs to'
+    required: false
   PROD_REPO_PATH:
+    required: false
     description: 'the path to the repo'
   
   using: "composite"
