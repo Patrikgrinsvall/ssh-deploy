@@ -1,0 +1,58 @@
+## Script for CD to a stage environment and manual deployment to production environment
+## Should really, ship a release package instead of git pull on remote server but no time now.
+name: ssh + git pull cd and production release
+
+on:
+  push:
+    branches: [master]
+  # trigger on manual run
+  workflow_dispatch:
+    inputs:
+      deployprod:
+        # this is not set unless  manual triggers so on CD it will default to false.
+        description: 'Deploy to production?'
+        default: 'YES'
+        required: true
+
+jobs:
+  deploy:
+    env:
+      STAGE_SSH_KEY: "${{ secrets.STAGE_SSH_PRIVATE_KEY }}"
+      STAGE_SSH_HOST: ${{ secrets.STAGE_SSH_HOST }}
+      STAGE_SSH_PORT: ${{ secrets.STAGE_SSH_PORT }}
+      STAGE_SSH_USER: ${{ secrets.STAGE_SSH_USER }}
+      STAGE_REMOTE_PATH: ${{ secrets.STAGE_REPO_PATH }}
+      PROD_SSH_KEY: "${{ secrets.PROD_SSH_PRIVATE_KEY }}"
+      PROD_SSH_HOST: ${{ secrets.PROD_SSH_HOST }}
+      PROD_SSH_PORT: ${{ secrets.PROD_SSH_PORT }}
+      PROD_SSH_USER: ${{ secrets.PROD_SSH_USER }}
+      PROD_REMOTE_PATH: ${{ secrets.PROD_REPO_PATH }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install SSH stage key on runner
+        run: |
+          mkdir -p ~/.ssh
+          echo "$STAGE_SSH_KEY" > ~/.ssh/stage_id_rsa
+          sudo chmod 600 ~/.ssh/stage_id_rsa
+          chmod 600 ~/.ssh/stage_id_rsa
+          echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+          chmod 700 ~/.ssh
+          chmod 600 ~/.ssh/stage_id_rsa
+      - name: Deploy to stage
+        run: | 
+          echo Updating git repo on stage
+          ssh -i ~/.ssh/stage_id_rsa -o StrictHostKeyChecking=no -p $STAGE_SSH_PORT $STAGE_SSH_USER@$STAGE_SSH_HOST "cd $STAGE_REMOTE_PATH && git pull"
+      - name: Deploy to production
+        run: |
+          if [ "${{ github.event.inputs.deployprod }}" != "YES" ]; then echo "Not running prod" && exit; fi;
+          mkdir -p ~/.ssh
+          echo "$PROD_SSH_KEY" > ~/.ssh/prod_id_rsa
+          sudo chmod 600 ~/.ssh/prod_id_rsa
+          chmod 600 ~/.ssh/prod_id_rsa
+          echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+          chmod 700 ~/.ssh
+          chmod 600 ~/.ssh/prod_id_rsa
+          echo "Production enabled, updating";
+          ssh -i ~/.ssh/prod_id_rsa -o StrictHostKeyChecking=no -p $PROD_SSH_PORT $PROD_SSH_USER@$PROD_SSH_HOST "cd $PROD_REMOTE_PATH && git pull"
